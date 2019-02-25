@@ -1,0 +1,270 @@
+action_factory: null
+action_names:
+- utter_greet
+- utter_frageVonWo
+- utter_frageNachWo
+- utter_frageWieVieleTickets
+- utter_frageReiseDatum
+- utter_frageZeitSlot
+- utter_frageObRueckreise
+- utter_frageRueckreiseDatum
+- utter_frageZeitSlotRueckreise
+- utter_fragePaymentType
+- utter_frageEmailadresse
+- utter_frageBuchungBestaetigtMitRueckreise
+- utter_frageBuchungBestaetigtOhneRueckreise
+- utter_reiseBestaetigt
+- utter_reiseNichtBestaetigt
+- utter_goodbye
+- utter_default
+- GPEoderCityInSlot
+- zeitInSlot
+- emailInSlot
+- yesno
+- preisBerechnen
+- datumInSlot
+- paymentInSlot
+- TicketsInSlot
+- ergebnisAusgeben
+actions:
+- utter_greet
+- utter_frageVonWo
+- utter_frageNachWo
+- utter_frageWieVieleTickets
+- utter_frageReiseDatum
+- utter_frageZeitSlot
+- utter_frageObRueckreise
+- utter_frageRueckreiseDatum
+- utter_frageZeitSlotRueckreise
+- utter_fragePaymentType
+- utter_frageEmailadresse
+- utter_frageBuchungBestaetigtMitRueckreise
+- utter_frageBuchungBestaetigtOhneRueckreise
+- utter_reiseBestaetigt
+- utter_reiseNichtBestaetigt
+- utter_goodbye
+- utter_default
+- customActions.GPEoderCityInSlot
+- customActions.zeitInSlot
+- customActions.emailInSlot
+- customActions.yesno
+- customActions.preisBerechnen
+- customActions.datumInSlot
+- customActions.paymentInSlot
+- customActions.TicketsInSlot
+- customActions.ergebnisAusgeben
+config:
+  store_entities_as_slots: true
+entities:
+- preposition
+- city
+- numberPassengers
+- reiseDatum
+- reiseUhrzeit
+- rueckreise
+- paymentTypes
+- emailAdresse
+- buchungBestaetigt
+- uhrzeit
+- datum
+- number
+- email
+- time
+- GPE
+- LOC
+intents:
+- buchung
+- emailadressen
+- anzahldertickets
+- zahlungstypen
+- affirm
+- deny
+- uhrzeit
+- conversation_start
+- thanks
+- goodbye
+- tage
+- orte
+- email
+slots:
+  buchungBestaetigt:
+    initial_value: null
+    type: rasa_core.slots.BooleanSlot
+  cityFrom:
+    initial_value: null
+    type: rasa_core.slots.TextSlot
+  cityTo:
+    initial_value: null
+    type: rasa_core.slots.TextSlot
+  emailAdresse:
+    initial_value: null
+    type: rasa_core.slots.TextSlot
+  numberPassengers:
+    initial_value: null
+    max_value: 15
+    min_value: 1
+    type: rasa_core.slots.FloatSlot
+  paymentTypes:
+    initial_value: null
+    type: rasa_core.slots.TextSlot
+  preis:
+    initial_value: null
+    max_value: 1.0
+    min_value: 0.0
+    type: rasa_core.slots.FloatSlot
+  reiseDatumHinreise:
+    initial_value: null
+    type: rasa_core.slots.TextSlot
+  reiseDatumRueckreise:
+    initial_value: null
+    type: rasa_core.slots.TextSlot
+  reiseUhrzeitHinreise:
+    initial_value: null
+    type: rasa_core.slots.TextSlot
+  reiseUhrzeitRueckreise:
+    initial_value: null
+    type: rasa_core.slots.TextSlot
+  rueckreise:
+    initial_value: null
+    type: rasa_core.slots.BooleanSlot
+templates:
+  utter_default:
+  - text: 'Debug: CityFrom: {cityFrom}
+
+      CityTo: {cityTo}
+
+      anzahldertickets: {numberPassengers}
+
+      reiseDatumHinreise: {reiseDatumHinreise},reiseDatumRueckreise: {reiseDatumRueckreise}
+
+      reiseUhrzeitHinreise: {reiseUhrzeitHinreise}
+
+      rueckreise: {rueckreise}
+
+      reiseUhrzeitRueckreise: {reiseUhrzeitRueckreise}
+
+      buchungBestaetigt: {buchungBestaetigt}
+
+      zahlungsart: {zahlungsart}
+
+      emailAdresse: {emailAdresse}'
+  utter_frageBuchungBestaetigtMitRueckreise:
+  - buttons:
+    - payload: 'yes'
+      title: Buchen
+    - payload: 'no'
+      title: Abbrechen
+    text: 'Sie Sie sicher, dass sie Folgendes Buchen wollen:
+
+      Startort: {cityFrom}
+
+      Zielort: {cityTo}
+
+      Anzahl der Tickets: {numberPassengers}
+
+      Hinfahrt am: {reiseDatumHinreise}
+
+      Hinfahrt um: {reiseUhrzeitHinreise}
+
+      Rückfahrt am: {reiseDatumRueckreise}
+
+      Rückfahrt um: {reiseUhrzeitRueckreise}
+
+      Zahlungsart: {paymentTypes}
+
+      Preis: {preis}
+
+      E-Mail-Adresse: {emailAdresse}'
+  utter_frageBuchungBestaetigtOhneRueckreise:
+  - buttons:
+    - payload: 'yes'
+      title: Buchen
+    - payload: 'no'
+      title: Abbrechen
+    text: 'Sie Sie sicher, dass sie Folgendes Buchen wollen:
+
+      Startort: {cityFrom}
+
+      Zielort: {cityTo}
+
+      Reisedatum(Hinreise): {reiseDatumHinreise}
+
+      Uhrzeit: {reiseUhrzeitHinreise}
+
+      Anzahl der Tickets: {numberPassengers}
+
+      Zahlungsart: {paymentTypes}
+
+      Preis: {preis}
+
+      E-Mail-Adresse: {emailAdresse}'
+  utter_frageEmailadresse:
+  - text: Wie lautet ihre E-Mail-Adresse?
+  utter_frageNachWo:
+  - text: Du willst von {cityFrom} reisen. Nenne den Namen der Stadt, in die du reisen
+      möchtest!
+  utter_frageObRueckreise:
+  - buttons:
+    - payload: 'yes'
+      title: Ja
+    - payload: 'no'
+      title: Nein
+    text: Willst du eine Rückreise dazubuchen?
+  utter_fragePaymentType:
+  - buttons:
+    - payload: paypal
+      title: PayPal
+    - payload: mobilepayment
+      title: Mobile Payments:Smartphone, Handy, Google Play, Apple Pay, etc.
+    - payload: Kreditkarte
+      title: Kreditkarte(Diners,Amex,Visa,American Express, MasterCard,etc.)
+    - payload: Lastschrift
+      title: Lastschrift,Rechnung,Bankeinzug,SEPA
+    - payload: Sofortueberweisung
+      title: Sofortüberweisung,Überweisung
+    - payload: Nachnahme
+      title: Nachnahme, Haustür, Briefträger, Postbote, Post
+    - payload: Barzahlung
+      title: Barzahlung, Münzen, Cash, Bargeld, Bar
+    text: Womit möchten Sie zahlen?
+  utter_frageReiseDatum:
+  - text: An welchem Tag möchtest du starten?
+  utter_frageRueckreiseDatum:
+  - text: An welchem Tag möchtest du zurückreisen?
+  utter_frageVonWo:
+  - text: Sag mir bitte die Stadt, in der du deine Reise beginnen willst
+  utter_frageWieVieleTickets:
+  - text: Wie viele Tickets benötigst du von {cityFrom} nach {cityTo}? (Zwischen 1
+      und 15)
+  utter_frageZeitSlot:
+  - buttons:
+    - payload: 8 Uhr
+      title: '8:00'
+    - payload: '10:00'
+      title: '10:00'
+    - payload: '14:00'
+      title: '14:00'
+    text: Ich kann dir folgende Zeiten für die Reise am {reiseDatumHinreise} anbieten.
+      Wann möchtest du reisen?
+  utter_frageZeitSlotRueckreise:
+  - buttons:
+    - payload: '17:00'
+      title: '17:00'
+    - payload: '19:00'
+      title: '19:00'
+    - payload: '23:00'
+      title: '23:00'
+    text: Ich kann dir folgende Zeiten für die Rückreise am {reiseDatumRueckreise}
+      anbieten. Wann möchtest du zurückreisen?
+  utter_goodbye:
+  - text: Bye
+  utter_greet:
+  - text: "Hallo mein Name ist Quanty. Ich bin der virtuelle Assistent von DEVELOP.\
+      \ Ich helfe Dir gerne bei Deiner Reisebuchung. \nZur Buchung gib bitte deine\
+      \ Reisedaten ein."
+  utter_reiseBestaetigt:
+  - text: Super. Vielen Dank für deine Buchung. Ich habe eine Bestätigung an {emailAdresse}
+      geschickt.
+  utter_reiseNichtBestaetigt:
+  - text: Ok, die Buchung deiner Reise wurde abgebrochen.
+topics: []

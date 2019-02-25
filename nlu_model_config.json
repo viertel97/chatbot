@@ -1,0 +1,23 @@
+{
+  "pipeline": [   
+   "nlp_spacy",
+    "tokenizer_spacy",
+    "intent_featurizer_spacy",
+    "intent_featurizer_ngrams",
+    "intent_entity_featurizer_regex",
+    "ner_crf",
+    "ner_synonyms",
+	"intent_classifier_sklearn",
+    "ner_duckling_http"
+  ],
+  "path" : "./models",
+  "project": "nlu",
+  "data" : "./data/nlu.md",
+  "language": "de",
+  "dimensions": [
+    "Email",
+    "Time",
+    "Numeral"
+  ],
+  "duckling_http_url":"http://localhost:8000"
+}
